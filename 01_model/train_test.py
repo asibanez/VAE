@@ -65,8 +65,9 @@ def run_epoch_f(args, mode, model, criterion, optimizer,
         sum_loss += (loss.item() * current_batch_size)
 
         #Append predictions to lists
-        Y_pred += pred_score.cpu().detach().numpy().tolist()
-        Y_gr_truth += X.cpu().detach().numpy().tolist()
+        #if mode == 'Test':
+        #    Y_pred += pred_score.cpu().detach().numpy().tolist()
+        #    Y_gr_truth += X.cpu().detach().numpy().tolist()
        
         # Log train step
         if mode == 'Train':
@@ -135,7 +136,7 @@ def main():
         test_dataset = torch.load(path_test_dataset)
         print(f'{datetime.datetime.now()}: Done')
         # Instantiate dataclasses
-        test_dataset = model_module.FEARS_dataset(test_dataset)
+        test_dataset = model_module.VAE_dataset(test_dataset)
         # Instantiate dataloaders
         test_dl = DataLoader(test_dataset,
                              batch_size = int(args.batch_size_test),
