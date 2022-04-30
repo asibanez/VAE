@@ -65,6 +65,9 @@ class VAE_model(nn.Module):
         self.conv_out = nn.Conv2d(32, 3, kernel_size = (1,1), padding = 'same')
 
     def forward(self, x):
+        device = x.get_device()
+        if device == -1: device = 'cpu'
+		
         # Encode
         x = self.conv_enc_0a(x)                         # batch_size x 32 x 218 x 178
         x = self.conv_enc_0b(x)                         # batch_size x 32 x 218 x 178
@@ -91,6 +94,7 @@ class VAE_model(nn.Module):
         std_mean = torch.zeros(mean.size())             # batch_size x h_dim
         std_sigma = torch.ones(sigma.size())            # batch_size x h_dim
         std_sample = torch.normal(std_mean, std_sigma)  # batch_size x h_dim
+        std_sample = std_sample.to(device)				# batch_size x h_dim
 
         # Reparametrize
         reparam_sample = (std_sample + mean)*sigma      # batch_size x h_dim
