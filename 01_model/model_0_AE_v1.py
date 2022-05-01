@@ -1,4 +1,5 @@
 # v1 -> Relu activations added
+#       Dataset normalized
 
 # Imports
 import torch.nn as nn
@@ -7,7 +8,7 @@ from torch.utils.data import Dataset
 #%% DataClass definition
 class VAE_dataset(Dataset):
     def __init__(self, dataset):
-        self.X = dataset
+        self.X = dataset / 255 - 0.5
                                         
     def __len__(self):
         return len(self.X)
