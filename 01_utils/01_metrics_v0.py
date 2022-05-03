@@ -118,29 +118,4 @@ plot_matrix[2,0].axis('off')
 plot_matrix[2,1].imshow(img_pred_interpol.permute(1, 2, 0))
 plot_matrix[2,1].axis('off')
 
-#%%
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
