@@ -153,6 +153,7 @@ def main():
                                  lr = args.lr,
                                  weight_decay = args.wd)
     criterion = nn.MSELoss()
+    #criterion = nn.BCELoss()
 
     # Train procedure
     if args.task == 'Train':
